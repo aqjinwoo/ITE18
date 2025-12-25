@@ -1,0 +1,179 @@
+{
+  "info": {
+    "name": "Event Ticketing API",
+    "_postman_id": "8e3f8c3c-6d6b-4b9a-9e21-evtickets-collection",
+    "description": "Postman collection for the Event Ticketing System APIs (Laravel + Sanctum). Uses variables: base_url, token, admin_token.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth (User)",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/auth/register", "host": ["{{base_url}}"], "path": ["api","v1","auth","register"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"email\": \"user@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/auth/login", "host": ["{{base_url}}"], "path": ["api","v1","auth","login"]},
+            "body": {"mode": "raw", "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password\"\n}"}
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/users/me", "host": ["{{base_url}}"], "path": ["api","v1","users","me"]}
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/users/logout", "host": ["{{base_url}}"], "path": ["api","v1","users","logout"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth (Admin)",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/admin-auth/login", "host": ["{{base_url}}"], "path": ["api","v1","admin-auth","login"]},
+            "body": {"mode": "raw", "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}"}
+          }
+        },
+        {
+          "name": "Admin Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{admin_token}}"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/admin/profile", "host": ["{{base_url}}"], "path": ["api","v1","admin","profile"]}
+          }
+        },
+        {
+          "name": "Admin Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{admin_token}}"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/admin/logout", "host": ["{{base_url}}"], "path": ["api","v1","admin","logout"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public (Browse)",
+      "item": [
+        {"name": "List Events", "request": {"method": "GET", "url": {"raw": "{{base_url}}/api/v1/events", "host": ["{{base_url}}"], "path": ["api","v1","events"]}}},
+        {"name": "Show Event", "request": {"method": "GET", "url": {"raw": "{{base_url}}/api/v1/events/1", "host": ["{{base_url}}"], "path": ["api","v1","events","1"]}}},
+        {"name": "List Categories", "request": {"method": "GET", "url": {"raw": "{{base_url}}/api/v1/categories", "host": ["{{base_url}}"], "path": ["api","v1","categories"]}}},
+        {"name": "List Venues", "request": {"method": "GET", "url": {"raw": "{{base_url}}/api/v1/venues", "host": ["{{base_url}}"], "path": ["api","v1","venues"]}}}
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/users/profile", "host": ["{{base_url}}"], "path": ["api","v1","users","profile"]}}
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {"raw": "{{base_url}}/api/v1/users/profile", "host": ["{{base_url}}"], "path": ["api","v1","users","profile"]},
+            "body": {"mode": "raw", "raw": "{\n  \"username\": \"updated_user\",\n  \"email\": \"updated@example.com\"\n}"}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tickets (User)",
+      "item": [
+        {"name": "List My Tickets", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/tickets", "host": ["{{base_url}}"], "path": ["api","v1","tickets"]}}},
+        {"name": "Buy Ticket", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/tickets", "host": ["{{base_url}}"], "path": ["api","v1","tickets"]}, "body": {"mode": "raw", "raw": "{\n  \"event_id\": 4\n}"}}},
+        {"name": "Show Ticket", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/tickets/102", "host": ["{{base_url}}"], "path": ["api","v1","tickets","102"]}}},
+        {"name": "Update Ticket (example)", "request": {"method": "PUT", "header": [{"key": "Authorization", "value": "Bearer {{token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/tickets/102", "host": ["{{base_url}}"], "path": ["api","v1","tickets","102"]}, "body": {"mode": "raw", "raw": "{\n  \"status\": \"cancelled\"\n}"}}},
+        {"name": "Delete Ticket", "request": {"method": "DELETE", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/tickets/102", "host": ["{{base_url}}"], "path": ["api","v1","tickets","102"]}}}
+      ]
+    },
+    {
+      "name": "Payments (User)",
+      "item": [
+        {"name": "List My Payments", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/payments", "host": ["{{base_url}}"], "path": ["api","v1","payments"]}}},
+        {"name": "Create Payment", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/payments", "host": ["{{base_url}}"], "path": ["api","v1","payments"]}, "body": {"mode": "raw", "raw": "{\n  \"ticket_id\": 102,\n  \"payment_method\": \"credit_card\",\n  \"amount\": 50.00\n}"}}},
+        {"name": "Show Payment", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": {"raw": "{{base_url}}/api/v1/payments/1", "host": ["{{base_url}}"], "path": ["api","v1","payments","1"]}}},
+        {"name": "Update Payment Status", "request": {"method": "PUT", "header": [{"key": "Authorization", "value": "Bearer {{token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/payments/1", "host": ["{{base_url}}"], "path": ["api","v1","payments","1"]}, "body": {"mode": "raw", "raw": "{\n  \"status\": \"completed\"\n}"}}}
+      ]
+    },
+    {
+      "name": "Admin (CRUD)",
+      "item": [
+        {"name": "List Admins", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/admins", "host": ["{{base_url}}"], "path": ["api","v1","admin","admins"]}}},
+        {"name": "Create Admin", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/admin/admins", "host": ["{{base_url}}"], "path": ["api","v1","admin","admins"]}, "body": {"mode": "raw", "raw": "{\n  \"username\": \"admin2\",\n  \"email\": \"admin2@example.com\",\n  \"password\": \"password\"\n}"}}},
+        {"name": "Update Admin", "request": {"method": "PUT", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/admin/admins/2", "host": ["{{base_url}}"], "path": ["api","v1","admin","admins","2"]}, "body": {"mode": "raw", "raw": "{\n  \"is_active\": true\n}"}}},
+        {"name": "Delete Admin", "request": {"method": "DELETE", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/admins/2", "host": ["{{base_url}}"], "path": ["api","v1","admin","admins","2"]}}}
+      ]
+    },
+    {
+      "name": "Admin (Events/Categories/Venues)",
+      "item": [
+        {"name": "Create Event", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/admin/events/", "host": ["{{base_url}}"], "path": ["api","v1","admin","events",""]}, "body": {"mode": "raw", "raw": "{\n  \"event_name\": \"Sample Event\",\n  \"event_date\": \"2025-12-31\",\n  \"category_id\": 1,\n  \"venue_id\": 1\n}"}}},
+        {"name": "Create Category", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/admin/categories/", "host": ["{{base_url}}"], "path": ["api","v1","admin","categories",""]}, "body": {"mode": "raw", "raw": "{\n  \"category_name\": \"Music\"\n}"}}},
+        {"name": "Create Venue", "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"},{"key": "Content-Type", "value": "application/json"}], "url": {"raw": "{{base_url}}/api/v1/admin/venues/", "host": ["{{base_url}}"], "path": ["api","v1","admin","venues",""]}, "body": {"mode": "raw", "raw": "{\n  \"venue_name\": \"Main Hall\",\n  \"address\": \"123 Street\",\n  \"capacity\": 500\n}"}}}
+      ]
+    },
+    {
+      "name": "Admin (Tickets/Payments/Dashboard)",
+      "item": [
+        {"name": "List Tickets", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/tickets/", "host": ["{{base_url}}"], "path": ["api","v1","admin","tickets",""]}}},
+        {"name": "List Payments", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/payments/", "host": ["{{base_url}}"], "path": ["api","v1","admin","payments",""]}}},
+        {"name": "Dashboard Stats", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/dashboard/stats", "host": ["{{base_url}}"], "path": ["api","v1","admin","dashboard","stats"]}}},
+        {"name": "Dashboard Reports", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/dashboard/reports", "host": ["{{base_url}}"], "path": ["api","v1","admin","dashboard","reports"]}}},
+        {"name": "Dashboard Analytics", "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{admin_token}}"}], "url": {"raw": "{{base_url}}/api/v1/admin/dashboard/analytics", "host": ["{{base_url}}"], "path": ["api","v1","admin","dashboard","analytics"]}}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "base_url", "value": "http://127.0.0.1:8000"},
+    {"key": "token", "value": ""},
+    {"key": "admin_token", "value": ""}
+  ]
+}
+
+

@@ -1,0 +1,55 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    /* Dark Mode Colors */
+    --color-background: #0a0a0f;
+    --color-foreground: #f8fafc;
+    --color-card: #111118;
+    --color-card-foreground: #f8fafc;
+    --color-primary: #0ea5e9;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #1e1e2e;
+    --color-secondary-foreground: #f8fafc;
+    --color-muted: #1e1e2e;
+    --color-muted-foreground: #94a3b8;
+    --color-accent: #0ea5e9;
+    --color-accent-foreground: #ffffff;
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+    --color-border: #1e1e2e;
+    --color-input: #1e1e2e;
+    --color-ring: #0ea5e9;
+    
+    /* Chart Colors */
+    --color-chart-1: #0ea5e9;
+    --color-chart-2: #06b6d4;
+    --color-chart-3: #8b5cf6;
+    --color-chart-4: #ec4899;
+    --color-chart-5: #f59e0b;
+}
+
+@layer base {
+    body {
+        @apply bg-background text-foreground;
+    }
+    
+    h1 {
+        @apply text-2xl font-semibold;
+    }
+    
+    h2 {
+        @apply text-xl font-semibold;
+    }
+    
+    h3 {
+        @apply text-lg font-semibold;
+    }
+}

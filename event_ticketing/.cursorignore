@@ -1,0 +1,30 @@
+# Cursor ignore file
+# This file controls which files are ignored by Cursor's AI features
+
+# IMPORTANT: .env files are NOT listed here, so they will be processed by AI
+# If you see .env files being ignored, it's due to global Cursor settings
+
+# Files and directories to ignore
+node_modules/
+vendor/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+bootstrap/cache/
+*.log
+*.tmp
+*.temp
+
+# Backup files to ignore
+.env.backup
+.env.local.backup
+.env.production.backup
+.env.*.backup
+
+# Explicitly allow these file types for AI processing
+!*.env
+!*.env.*
+!config/*.php
+!*.config.js
+!*.config.json
